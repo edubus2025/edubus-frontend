@@ -1,4 +1,7 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.93:8000"
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL && process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_API_URL
+    : "http://192.168.1.93:8000";
 
 interface ApiResponse<T> {
   data: T | null

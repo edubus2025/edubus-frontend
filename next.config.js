@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV === "development";
+
 const nextConfig = {
   serverExternalPackages: ["sharp"],
   eslint: {
@@ -8,46 +10,71 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["localhost", "192.168.1.93", "192.168.0.102", "192.168.0.103", "127.0.0.1"],
+    domains: [
+      "localhost",
+      "127.0.0.1",
+      "192.168.1.93",
+      "192.168.0.102",
+      "192.168.0.103",
+      "dptinghir.pythonanywhere.com", // ✅ Pour images depuis backend en production
+    ],
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "8000",
-        pathname: "/media/**",
-      },
-      {
-        protocol: "http",
-        hostname: "192.168.1.93",
-        port: "8000",
-        pathname: "/media/**",
-      },
-      {
-        protocol: "http",
-        hostname: "192.168.0.102",
-        port: "8000",
-        pathname: "/media/**",
-      },
-      {
-        protocol: "http",
-        hostname: "192.168.0.103",
-        port: "8000",
-        pathname: "/media/**",
-      },
+      ...(isDev
+        ? [
+            {
+              protocol: "http",
+              hostname: "localhost",
+              port: "8000",
+              pathname: "/media/**",
+            },
+            {
+              protocol: "http",
+              hostname: "192.168.1.93",
+              port: "8000",
+              pathname: "/media/**",
+            },
+            {
+              protocol: "http",
+              hostname: "192.168.0.102",
+              port: "8000",
+              pathname: "/media/**",
+            },
+            {
+              protocol: "http",
+              hostname: "192.168.0.103",
+              port: "8000",
+              pathname: "/media/**",
+            },
+          ]
+        : [
+            {
+              protocol: "https",
+              hostname: "dptinghir.pythonanywhere.com",
+              pathname: "/media/**",
+            },
+          ]),
     ],
     unoptimized: true,
   },
-  // Configuration pour résoudre l'avertissement Cross Origin
   experimental: {
-    allowedDevOrigins: ["192.168.0.102:3000", "192.168.0.103:3000" , "192.168.1.93:3000", "localhost:3000", "127.0.0.1:3000"],
+    allowedDevOrigins: [
+      "localhost:3000",
+      "127.0.0.1:3000",
+      "192.168.1.93:3000",
+      "192.168.0.102:3000",
+      "192.168.0.103:3000",
+    ],
   },
   async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "http://192.168.0.103:8000/api/:path*",
-      },
-    ]
+    if (isDev) {
+      return [
+        {
+          source: "/api/:path*",
+          destination: "http://192.168.0.103:8000/api/:path*",
+        },
+      ];
+    }
+    return [];
   },
   async headers() {
     return [
@@ -56,7 +83,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: "*", // ⚠️ à restreindre si besoin
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -68,8 +95,8 @@ const nextConfig = {
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
