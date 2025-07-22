@@ -115,7 +115,12 @@ export function setAuthToken(token: string | null): void {
 
 // Fonction de connexion
 export async function loginUser(loginData: LoginData): Promise<ApiResponse<LoginResponse>> {
-  const response = await apiRequest<LoginResponse>("/api/accounts/login/", "POST", loginData)
+  const cleanedLoginData = {
+    username: loginData.username.trim().toLowerCase().replace(/\s+/g, "_"),
+    password: loginData.password,
+  }
+
+  const response = await apiRequest<LoginResponse>("/api/accounts/login/", "POST", cleanedLoginData)
 
   if (response.data?.token) {
     setAuthToken(response.data.token)
@@ -127,7 +132,13 @@ export async function loginUser(loginData: LoginData): Promise<ApiResponse<Login
 
 // Fonction d'inscription
 export async function registerUser(registerData: RegisterData): Promise<ApiResponse<User>> {
-  return apiRequest<User>("/api/accounts/register/", "POST", registerData)
+  const cleanedRegisterData = {
+    username: registerData.username.trim().toLowerCase().replace(/\s+/g, "_"),
+    email: registerData.email.trim().toLowerCase(),
+    password: registerData.password,
+  }
+
+  return apiRequest<User>("/api/accounts/register/", "POST", cleanedRegisterData)
 }
 
 // Fonction pour obtenir l'utilisateur actuel - CORRIGÉE
