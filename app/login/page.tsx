@@ -668,7 +668,8 @@ export default function LandingAndLoginPage() {
       {/* Footer */}
       <footer className="bg-neutral-800 dark:bg-neutral-900 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+            {/* Section À propos */}
             <div className="space-y-4 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <Image
@@ -684,14 +685,16 @@ export default function LandingAndLoginPage() {
                 Transformez vos trajets en moments d'apprentissage avec notre plateforme éducative innovante.
               </p>
             </div>
-            <div className="mt-6 text-center md:text-left">
-              <h5 className="font-semibold text-base md:text-lg text-white mb-2">Guides des utilisateurs</h5>
+
+            {/* Section Guides des utilisateurs */}
+            <div className="space-y-4 text-center md:text-left">
+              <h5 className="font-semibold text-base md:text-lg text-white">Guides des utilisateurs</h5>
               <div className="flex flex-col items-center md:items-start gap-2">
                 <a
                   href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_eleveVF.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline transition-colors"
                 >
                   📘 Guide EduBus Élève
                 </a>
@@ -699,29 +702,35 @@ export default function LandingAndLoginPage() {
                   href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_enseignantVF.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline transition-colors"
                 >
                   🧑‍🏫 Guide EduBus Enseignant
                 </a>
               </div>
             </div>
 
+            {/* Section Matières */}
             <div className="space-y-4 text-center md:text-left">
-              <h5 className="font-semibold text-base md:text-lg">Matières</h5>
+              <h5 className="font-semibold text-base md:text-lg text-white">Matières</h5>
               <ul className="space-y-1 md:space-y-2 text-sm md:text-base text-neutral-400">
                 {subjects.map((subject) => (
-                  <li key={subject}>{subject}</li>
+                  <li key={subject} className="hover:text-neutral-300 transition-colors">
+                    {subject}
+                  </li>
                 ))}
               </ul>
             </div>
 
+            {/* Section Contact */}
             <div className="space-y-4 text-center md:text-left">
-              <h5 className="font-semibold text-base md:text-lg">Contact</h5>
-              <div className="space-y-1 md:space-y-2 text-sm md:text-base text-neutral-400">
-                <p>📧 AIDPM@gmail.com</p>
-                <p>📱 +212 661 57 22 07</p>
-                <p>📘 Facebook: /AIDPM</p>
-                <p>📍 Association Ighil pour le Développement de la Population Montagnarde Kelaa M'gouna BP 129</p>
+              <h5 className="font-semibold text-base md:text-lg text-white">Contact</h5>
+              <div className="space-y-2 text-sm md:text-base text-neutral-400">
+                <p className="hover:text-neutral-300 transition-colors">📧 AIDPM@gmail.com</p>
+                <p className="hover:text-neutral-300 transition-colors">📱 +212 661 57 22 07</p>
+                <p className="hover:text-neutral-300 transition-colors">📘 Facebook: /AIDPM</p>
+                <p className="hover:text-neutral-300 transition-colors">
+                  📍 Association Ighil pour le Développement de la Population Montagnarde Kelaa M'gouna BP 129
+                </p>
               </div>
             </div>
           </div>
