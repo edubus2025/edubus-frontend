@@ -633,6 +633,27 @@ export default function LandingAndLoginPage() {
                 Transformez vos trajets en moments d'apprentissage avec notre plateforme éducative innovante.
               </p>
             </div>
+        <div className="mt-6 text-center md:text-left">
+          <h5 className="font-semibold text-base md:text-lg text-white mb-2">Guides des utilisateurs</h5>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <a
+              href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_eleveVF.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+           >
+              📘 Guide EduBus Élève
+            </a>
+            <a
+              href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_enseignantVF.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+            >
+              🧑‍🏫 Guide EduBus Enseignant
+            </a>
+          </div>
+        </div>    
 
             <div className="space-y-4 text-center md:text-left">
               <h5 className="font-semibold text-base md:text-lg">Matières</h5>
