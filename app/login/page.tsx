@@ -9,7 +9,18 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { BookOpen, Play, TrendingUp, Brain, CheckCircle, ArrowRight, GraduationCap, Star, Sparkles } from "lucide-react"
+import {
+  BookOpen,
+  Play,
+  TrendingUp,
+  Brain,
+  CheckCircle,
+  ArrowRight,
+  GraduationCap,
+  Star,
+  Sparkles,
+  LogIn,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { loginUser, registerUser, getCurrentUser, isAuthenticated, getStoredUser } from "@/lib/api"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -61,6 +72,16 @@ export default function LandingAndLoginPage() {
     }
     checkAuth()
   }, [router])
+
+  const scrollToLoginForm = () => {
+    const loginSection = document.getElementById("login-section")
+    if (loginSection) {
+      loginSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      })
+    }
+  }
 
   const handleLogin = async (e: React.FormEvent, role: "student" | "teacher") => {
     e.preventDefault()
@@ -158,6 +179,16 @@ export default function LandingAndLoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
+      {/* Bouton de connexion fixe */}
+      <Button
+        onClick={scrollToLoginForm}
+        className="fixed top-4 md:top-8 right-20 md:right-24 z-50 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+        size="sm"
+      >
+        <LogIn className="w-4 h-4 mr-2" />
+        Connexion
+      </Button>
+
       {/* Header avec logo et navigation */}
       <header className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500">
         <div className="absolute inset-0 bg-black/10"></div>
@@ -323,7 +354,7 @@ export default function LandingAndLoginPage() {
         </section>
 
         {/* Section Connexion/Inscription */}
-        <section className="max-w-md mx-auto">
+        <section id="login-section" className="max-w-md mx-auto">
           <Card className="shadow-2xl border-0 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm">
             <CardHeader className="text-center space-y-4 p-4 md:p-6">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl md:rounded-2xl mx-auto flex items-center justify-center">
@@ -633,27 +664,27 @@ export default function LandingAndLoginPage() {
                 Transformez vos trajets en moments d'apprentissage avec notre plateforme éducative innovante.
               </p>
             </div>
-        <div className="mt-6 text-center md:text-left">
-          <h5 className="font-semibold text-base md:text-lg text-white mb-2">Guides des utilisateurs</h5>
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <a
-              href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_eleveVF.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
-           >
-              📘 Guide EduBus Élève
-            </a>
-            <a
-              href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_enseignantVF.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
-            >
-              🧑‍🏫 Guide EduBus Enseignant
-            </a>
-          </div>
-        </div>    
+            <div className="mt-6 text-center md:text-left">
+              <h5 className="font-semibold text-base md:text-lg text-white mb-2">Guides des utilisateurs</h5>
+              <div className="flex flex-col items-center md:items-start gap-2">
+                <a
+                  href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_eleveVF.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+                >
+                  📘 Guide EduBus Élève
+                </a>
+                <a
+                  href="https://dptinghir.pythonanywhere.com/static/guides/guide_EduBus_enseignantVF.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-blue-300 hover:text-blue-100 underline"
+                >
+                  🧑‍🏫 Guide EduBus Enseignant
+                </a>
+              </div>
+            </div>
 
             <div className="space-y-4 text-center md:text-left">
               <h5 className="font-semibold text-base md:text-lg">Matières</h5>
