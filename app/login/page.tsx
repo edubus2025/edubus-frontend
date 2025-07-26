@@ -35,6 +35,7 @@ export default function LandingAndLoginPage() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [activeAuthTab, setActiveAuthTab] = useState<"student" | "teacher">("student")
   const [showStudentRegister, setShowStudentRegister] = useState(false)
+  const [showLoginButton, setShowLoginButton] = useState(true)
 
   useEffect(() => {
     async function checkAuth() {
@@ -72,6 +73,22 @@ export default function LandingAndLoginPage() {
     }
     checkAuth()
   }, [router])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const loginSection = document.getElementById("login-section")
+      if (loginSection) {
+        const rect = loginSection.getBoundingClientRect()
+        const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0
+        setShowLoginButton(!isVisible)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Check initial state
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const scrollToLoginForm = () => {
     const loginSection = document.getElementById("login-section")
@@ -180,14 +197,17 @@ export default function LandingAndLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
       {/* Bouton de connexion fixe */}
-      <Button
-        onClick={scrollToLoginForm}
-        className="fixed top-4 md:top-8 right-20 md:right-24 z-50 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-        size="sm"
-      >
-        <LogIn className="w-4 h-4 mr-2" />
-        Connexion
-      </Button>
+      {showLoginButton && (
+        <Button
+          onClick={scrollToLoginForm}
+          className="fixed top-4 md:top-8 right-16 md:right-24 z-50 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 text-xs md:text-sm px-2 py-1 md:px-3 md:py-2 h-8 md:h-10"
+          size="sm"
+        >
+          <LogIn className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+          <span className="hidden sm:inline">Connexion</span>
+          <span className="sm:hidden">Se connecter</span>
+        </Button>
+      )}
 
       {/* Header avec logo et navigation */}
       <header className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500">
