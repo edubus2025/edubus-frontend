@@ -5,6 +5,10 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+html {
+  -webkit-text-size-adjust: 100%; /* Empêche le zoom automatique du texte dans les WebView Android */
+  text-size-adjust: 100%;         /* Pour d'autres moteurs comme Firefox */
+}
 
 @layer utilities {
   .text-balance {
