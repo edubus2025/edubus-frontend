@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         {/* ✅ Balise meta viewport pour adaptabilité mobile et WebView */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
